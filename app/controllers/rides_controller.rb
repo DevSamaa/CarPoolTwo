@@ -1,12 +1,34 @@
 class RidesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+
   def index
-    @ride = Ride.all
+    @ride = Ride.all # returns an array of rides
   end
 
   def show
-    @ride = Ride.find(params[:id])
-    @user = User.find(params[:id])
+    @ride = Ride.find(params[:id])  
+    @ride_time = @ride.ride_time.strftime("%H:%M")
+    session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        customer_email: current_user.email,
+        line_items: [{
+            name: @ride.user_id,
+            description: "ride from: " + @ride.departure_city + "ride to: " + @ride.arrival_city,
+            amount: (@ride.price * 100).to_i,
+            currency: 'aud',
+            quantity: 1,
+        }],
+        payment_intent_data: {
+            metadata: {
+                user_id: current_user.id,
+                ride_id: @ride.id
+            }
+        },
+        success_url: "#{root_url}payments/success?userId=#{current_user.id}&rideId=#{@ride.id}",
+        cancel_url: "#{root_url}rides"
+    )
+
+    @session_id = session.id
   end
 
   def new
@@ -14,6 +36,7 @@ class RidesController < ApplicationController
   end
 
   def edit
+    @ride = Ride.find(params[:id])
   end
 
   def create
@@ -28,6 +51,13 @@ class RidesController < ApplicationController
   end
 
   def update
+    @ride = Ride.find(params[:id])
+    
+    if @ride.update( ride_params )
+      redirect_to @ride
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -42,27 +72,8 @@ class RidesController < ApplicationController
 
   private
 
-  # def set_ride
-  #   id = params[ :id ]
-  #   @ride = Ride.find( id ) 
-  # end
-  
-  # def set_user_ride
-  #   id = params[:id]
-  #   @ride = current_user.rides.find_by_id( id)
-  
-  #   if @ride == nil
-  #     redirect_to rides_path
-  #   else
-  #     if @ride.price == nil
-  #         @ride.price = 0  
-  #     end
-  #   end
-    
-  # end
-
   def ride_params
-    ride_params = params.require(:ride).permit(:departure_city, :arrival_city, :meeting_point, :ride_date, :ride_time, :car_color, :car_make, :price )
+    ride_params = params.require(:ride).permit(:user_id, :departure_city, :arrival_city, :meeting_point, :ride_date, :ride_time, :car_color, :car_make, :price )
   end
 
 end

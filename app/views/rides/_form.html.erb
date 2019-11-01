@@ -1,23 +1,15 @@
 
 <%= form_with model: ride, local: true do |form| %>
 
-    <% if ride.errors.any? %>
-        <div id="error_explanation">
-            <ul>
-                <% ride.errors.full_messages.each do |msg| %>
-                    <li><%= msg %></li>
-                <% end %>
-            </ul>
-        </div>
-    <% end %>
+
   
     <div>
         <%= form.label :departure_city %>
-        <%= form.text_field :departure_city %>
+        <%= form.select(:departure_city, [ ['Adelaide'], ['Perth'], ['Darwin'], ['Brisbane'], ['Sydney'],['Melbourne'], ['Ballarat'], ['Bendigo'] ].sort )%>
     </div>
     <div>
         <%= form.label :arrival_city %>
-        <%= form.text_field :arrival_city  %>
+        <%= form.select(:arrival_city, [ ['Adelaide'], ['Perth'], ['Darwin'], ['Brisbane'], ['Sydney'],['Melbourne'], ['Ballarat'], ['Bendigo'] ].sort )%>
     </div>
     <div>
         <%= form.label :meeting_point %>
@@ -34,12 +26,12 @@
 
     <div>
         <%= form.label :car_color %>
-        <%= form.text_field :car_color %>
+        <%= form.select(:car_color, [['blue'], ['red'], ['green'], ['yellow'], ['pink'], ['orange'], ['white'], ['black'], ['grey'], ['purple']].sort )%>
     </div>
 
     <div>
         <%= form.label :car_make %>
-        <%= form.text_field :car_make  %>
+        <%= form.select(:car_make, [['Toyota'], ['Mercedes'], ['VW'], ['Porsche'], ['Subaru'], ['Holden'], ['Nissan'], ['Honda'], ['Hyundai'], ['Ford'], ['Mazda'], ['Mitsubishi'], ['Audi'], ['Kia'], ['Jeep'] ].sort )%>
     </div>
 
     <div>

@@ -17,15 +17,18 @@
     <td><%= ride.arrival_city %></td>
     <td><%= ride.meeting_point %></td>
     <td><%= ride.ride_date %></td>
-    <td><%= ride.ride_time %></td>
+    <td><%= ride.ride_time.strftime("%H:%M") %></td>
     <td><%= ride.price %></td>
 
     <td><%= link_to "Show", ride_path( ride)%></td>
-    
-<% if current_user.id == rides.user_id%>
+
+<%if (current_user)%>
+<% if current_user.id == ride.user_id%>
     <td><%= link_to "Edit", edit_ride_path( ride ) %></td>
     <td><%= link_to "Destroy", ride_path( ride ), method: :delete, data: { confirm: "Are you really sure?"} %></td>
 <%end%>
+<%end%>
+
 
 </tr>
 <% end %>

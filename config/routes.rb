@@ -11,9 +11,11 @@ Rails.application.routes.draw do
   # get 'welcome/index'
   resources :rides
   post 'rides/create'
-  
+
   devise_for :users
   
   get "/", to: "welcome#index", as: "root"
   get 'welcome/index'
+
+  get "/payments/success", to: "payments#success"
 end
