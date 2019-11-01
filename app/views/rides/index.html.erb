@@ -1,0 +1,35 @@
+<h1>Browse all the available rides in Australia </h1>
+
+<table>
+    <tr>
+        <th>Departure City</th>
+        <th>Arrival City</th>
+        <th>Meeting Point</th>
+        <th>Departure Date</th>
+        <th>Departure Time</th>
+        <th>Price</th>
+ 
+    </tr>    
+
+<% @ride.each do |ride| %>
+<tr>
+    <td><%= ride.departure_city %></td>
+    <td><%= ride.arrival_city %></td>
+    <td><%= ride.meeting_point %></td>
+    <td><%= ride.ride_date %></td>
+    <td><%= ride.ride_time %></td>
+    <td><%= ride.price %></td>
+
+    <td><%= link_to "Show", ride_path( ride)%></td>
+    
+<% if current_user.id == rides.user_id%>
+    <td><%= link_to "Edit", edit_ride_path( ride ) %></td>
+    <td><%= link_to "Destroy", ride_path( ride ), method: :delete, data: { confirm: "Are you really sure?"} %></td>
+<%end%>
+
+</tr>
+<% end %>
+
+</table>
+
+<%= link_to "Add New Ride", new_ride_path%>

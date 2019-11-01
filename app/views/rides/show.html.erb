@@ -1,0 +1,19 @@
+
+
+<h1><%= "This is the ride that you listed" %></h1>
+
+<p>
+    <strong>Departure City:</strong>
+    <%= @ride.departure_city %>
+</p>
+<p>
+    <strong>Driver Name:</strong>
+    <%= @user.name %>
+</p>
+
+
+
+
+<%= link_to "Edit", edit_ride_path(@ride) %>
+<%= link_to "Back", rides_path %>
+<%= link_to "Destroy", ride_path(@ride), method: :delete, data: {confirm: "Are you really sure?"} %>

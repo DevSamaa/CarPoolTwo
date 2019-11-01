@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  departure_city: MyString
+  arrival_city: MyString
+  meeting_point: MyText
+  ride_date: 2019-10-31
+  ride_time: 2019-10-31 17:14:31
+  car_color: MyString
+  car_make: MyString
+  price: 1.5
+
+two:
+  user: two
+  departure_city: MyString
+  arrival_city: MyString
+  meeting_point: MyText
+  ride_date: 2019-10-31
+  ride_time: 2019-10-31 17:14:31
+  car_color: MyString
+  car_make: MyString
+  price: 1.5

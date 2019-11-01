@@ -1,0 +1,53 @@
+
+<%= form_with model: ride, local: true do |form| %>
+
+    <% if ride.errors.any? %>
+        <div id="error_explanation">
+            <ul>
+                <% ride.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+  
+    <div>
+        <%= form.label :departure_city %>
+        <%= form.text_field :departure_city %>
+    </div>
+    <div>
+        <%= form.label :arrival_city %>
+        <%= form.text_field :arrival_city  %>
+    </div>
+    <div>
+        <%= form.label :meeting_point %>
+        <%= form.text_area :meeting_point %>
+    </div>
+    <div>
+        <%= form.label :ride_date %>
+        <%= form.date_field :ride_date%>
+    </div>
+    <div>
+        <%= form.label :ride_time %>
+        <%= form.time_field :ride_time %>
+    </div>
+
+    <div>
+        <%= form.label :car_color %>
+        <%= form.text_field :car_color %>
+    </div>
+
+    <div>
+        <%= form.label :car_make %>
+        <%= form.text_field :car_make  %>
+    </div>
+
+    <div>
+        <%= form.label :price %>
+        <%= form.number_field :price %>
+    </div>
+
+    <div>
+        <%= form.submit %>
+    </div>
+<% end %>
