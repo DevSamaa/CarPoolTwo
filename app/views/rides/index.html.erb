@@ -20,7 +20,7 @@
     <td><%= ride.ride_time.strftime("%H:%M") %></td>
     <td><%= ride.price %></td>
 
-    <td><%= link_to "Show", ride_path( ride)%></td>
+    <td><%= link_to "Show", ride_path( ride)%></td>    
 
 <%if (current_user)%>
 <% if current_user.id == ride.user_id%>
@@ -36,3 +36,5 @@
 </table>
 
 <%= link_to "Add New Ride", new_ride_path%>
+<br>
+<%= link_to "Bookings", bookings_path%>

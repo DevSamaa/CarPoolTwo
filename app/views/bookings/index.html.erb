@@ -1,0 +1,16 @@
+<h1>Bookings Index</h1>
+
+<table>
+    <tr>
+        <th>Booked by:</th>
+        <th>Ride ID</th>
+    </tr>    
+
+<% @booking.each do |booking| %>
+<tr>
+    <td><%= booking.user.name %></td>
+    <td><%= booking.ride_id %></td>
+</tr>
+<% end %>
+
+</table>

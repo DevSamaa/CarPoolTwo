@@ -1,2 +1,13 @@
-You've successfully made a payment! <%= link_to "Go To Rides", rides_path
-%>
+<p>You've successfully made a payment! </p>
+
+<p> You paid: <%= @ride.price %> AUD</p>
+<p> Your ride is on the : <%= @ride.ride_date %></p>
+<p> Ride time: <%= @ride.ride_time.strftime("%H:%M")  %></p>
+<p> Departure City: <%= @ride.departure_city %></p>
+<p> Arrival City: <%= @ride.arrival_city %></p>
+<p> Meeting Point: <%= @ride.meeting_point %></p>
+<p> Name of your driver: <%= @ride.user.name %></p>
+<p> Phone Number of your driver: <%= @ride.user.phone_number %></p>
+
+
+<%= link_to "Go To Rides", rides_path%>

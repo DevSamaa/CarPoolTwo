@@ -1,6 +1,14 @@
 
 <%= form_with model: ride, local: true do |form| %>
-
+    <% if ride.errors.any? %>
+        <div id="error_explanation">
+            <ul>
+                <% ride.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
 
   
     <div>

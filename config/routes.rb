@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'bookings/index'
   # all the 7 lines below were replaces with a simple 'resources :rides' line above. Keeping it DRY.
   # get 'rides/index'
   # get 'rides/show'
@@ -14,6 +15,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   
+  resources :bookings
+
   get "/", to: "welcome#index", as: "root"
   get 'welcome/index'
 

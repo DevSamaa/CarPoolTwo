@@ -1,4 +1,5 @@
 class Ride < ApplicationRecord
   belongs_to :user
-  validates :ride_time, presence: true
+  validates :ride_date, :ride_time, :price, presence: true
+  has_many :bookings
 end
