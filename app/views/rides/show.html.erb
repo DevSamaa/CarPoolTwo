@@ -2,6 +2,10 @@
 
 <h1><%= "This is the ride:" %></h1>
 
+<div>
+    <%= image_tag(@ride.picture ,size:200)if @ride.picture.attached?%>
+</div>
+
 <p>
     <strong>Departure City:</strong>
     <%= @ride.departure_city %>
