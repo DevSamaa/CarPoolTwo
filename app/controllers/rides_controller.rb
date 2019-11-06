@@ -1,5 +1,5 @@
 class RidesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index]
 
   def index
     @ride = Ride.all # returns an array of rides

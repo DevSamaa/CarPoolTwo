@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CarPoolTwo</title>
+    <title>HitchARide</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,7 +12,7 @@
   <body>
   
     <% if user_signed_in? %>
-      <p>Hi there <%= current_user.name%></p>
+      <p>Hi there you are currently signed in as "<%= current_user.name%>"</p>
       <%= link_to "logout", destroy_user_session_path, method: :delete %>
       
     <% else %>

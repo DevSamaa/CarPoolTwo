@@ -22,3 +22,9 @@ Things you may want to cover:
 * Deployment instructions
 
 # R7 and R8
+
+#R9 A link (URL) to your deployed app (i.e. website)
+
+#R10 A link to your GitHub repository (repo).
+<br>
+https://github.com/DevSamaa/CarPoolTwo
