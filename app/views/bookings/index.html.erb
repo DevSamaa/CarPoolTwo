@@ -1,16 +1,51 @@
-<h1>Bookings Index</h1>
+<h1>My Bookings </h1>
+
+<h3>Rides that you bought</h3>
+<table>
+    <tr>
+        <th>Booked by:</th>
+        <th>Ride ID</th>
+        <th>Departure City</th>
+        <th>Arrival City</th>
+    </tr>    
+
+
+<% @bookings.each do |booking| %>
+<tr>
+    <td><%= booking.user.name %></td>
+    <td><%= booking.ride_id %></td>
+    <td><%= booking.ride.departure_city %></td>
+    <td><%= booking.ride.arrival_city %></td>
+</tr>
+<% end %>
+</table>
+
+<br>
+-------------
+
+<h3>Rides that you sold</h3>
 
 <table>
     <tr>
         <th>Booked by:</th>
         <th>Ride ID</th>
+        <th>Departure City</th>
+        <th>Arrival City</th>
     </tr>    
 
-<% @booking.each do |booking| %>
-<tr>
-    <td><%= booking.user.name %></td>
-    <td><%= booking.ride_id %></td>
+<% @rides.each do |ride| %>
+  <% ride.bookings.each do |booking|%>
+  <tr>
+        <td><%= booking.user.name %></td>
+    <% end %>
+
+    <td><%= ride.id %></td>
+    <td><%= ride.departure_city %></td>
+    <td><%= ride.arrival_city %></td>
 </tr>
 <% end %>
 
 </table>
+
+<br>
+<%= link_to "Back to all rides", rides_path %>

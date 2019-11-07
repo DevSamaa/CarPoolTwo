@@ -75,7 +75,7 @@
     });
 </script>
 
-<%= link_to "Back", rides_path %>
+<%= link_to "Back to all rides", rides_path %>
 <%if (current_user)%>
 <% if current_user.id == @ride.user_id%>
     <td><%= link_to "Edit", edit_ride_path( @ride ) %></td>

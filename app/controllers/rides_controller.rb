@@ -1,5 +1,7 @@
 class RidesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
+  before_action :set_user_ride, only: [ :edit, :update, :destroy ]
+
 
   def index
     @ride = Ride.all # returns an array of rides
@@ -63,9 +65,6 @@ class RidesController < ApplicationController
   def destroy
     @ride = Ride.find(params[:id])
     @ride.destroy
-    # link_to 'Destroy', ride_path(@ride), method: :delete
-    # @ride.destroy
-    # @ride = Ride.find(params[:id])
     redirect_to rides_path
   end
 
@@ -74,6 +73,15 @@ class RidesController < ApplicationController
 
   def ride_params
     ride_params = params.require(:ride).permit(:user_id, :departure_city, :arrival_city, :meeting_point, :ride_date, :ride_time, :car_color, :car_make, :price, :picture )
+  end
+
+  def set_user_ride
+    id = params[:id]
+    @ride = current_user.rides.find_by_id(id)
+
+    if @ride == nil
+      redirect_to rides_path
+    end
   end
 
 end

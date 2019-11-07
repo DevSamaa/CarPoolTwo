@@ -1,5 +1,7 @@
 class BookingsController < ApplicationController
   def index
-    @booking = Booking.all
+    @bookings = current_user.bookings
+    @rides = current_user.rides.joins(:bookings)
+  
   end
 end
