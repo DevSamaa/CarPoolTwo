@@ -11,7 +11,7 @@
  
     </tr>    
 
-<% @ride.each do |ride| %>
+<% @rides.each do |ride| %>
 <tr>
     <td><%= ride.departure_city %></td>
     <td><%= ride.arrival_city %></td>
@@ -32,6 +32,43 @@
 
 </tr>
 <% end %>
+
+</table>
+
+-------------
+
+<table>
+    <tr>
+        <th>Departure City</th>
+        <th>Arrival City</th>
+        <th>Meeting Point</th>
+        <th>Departure Date</th>
+        <th>Departure Time</th>
+        <th>Price</th>
+ 
+    </tr>    
+
+    <% @ride.each do |ride| %>
+    <tr>
+    <%if (current_user)%>
+    <% if current_user.id == @ride.user_id%>
+        <td><%= ride.departure_city %></td>
+        <td><%= ride.arrival_city %></td>
+        <td><%= ride.meeting_point %></td>
+        <td><%= ride.ride_date %></td>
+        <td><%= ride.ride_time.strftime("%H:%M") %></td>
+        <td><%= ride.price %></td>
+
+        <td><%= link_to "Show", ride_path( ride)%></td>  
+        <td><%= link_to "Edit", edit_ride_path( ride ) %></td>
+        <td><%= link_to "Destroy", ride_path( ride ), method: :delete, data: { confirm: "Are you really sure?"} %></td> 
+        <%end%>
+        <%end%>
+    </tr>
+    <% end %>
+
+    
+
 
 </table>
 

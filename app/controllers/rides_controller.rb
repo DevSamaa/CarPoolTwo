@@ -4,7 +4,7 @@ class RidesController < ApplicationController
 
 
   def index
-    @ride = Ride.all # returns an array of rides
+    @rides = Ride.all # returns an array of rides
   end
 
   def show
