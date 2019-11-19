@@ -1,5 +1,6 @@
 <h1>Browse all the available rides in Australia </h1>
 
+<h1>These are the rides that other people listed</h1>
 <table>
     <tr>
         <th>Departure City</th>
@@ -8,69 +9,69 @@
         <th>Departure Date</th>
         <th>Departure Time</th>
         <th>Price</th>
- 
     </tr>    
 
-<% @rides.each do |ride| %>
-<tr>
-    <td><%= ride.departure_city %></td>
-    <td><%= ride.arrival_city %></td>
-    <td><%= ride.meeting_point %></td>
-    <td><%= ride.ride_date %></td>
-    <td><%= ride.ride_time.strftime("%H:%M") %></td>
-    <td><%= ride.price %></td>
+    <% @rides.each do |ride| %>
+        <% if (current_user && current_user.id != ride.user_id) || !current_user %>
+            <tr>
+                <td><%= ride.departure_city %></td>
+                <td><%= ride.arrival_city %></td>
+                <td><%= ride.meeting_point %></td>
+                <td><%= ride.ride_date %></td>
+                <td><%= ride.ride_time.strftime("%H:%M") %></td>
+                <td><%= ride.price %></td>
 
-    <td><%= link_to "Show", ride_path( ride)%></td>    
-
-<%if (current_user)%>
-<% if current_user.id == ride.user_id%>
-    <td><%= link_to "Edit", edit_ride_path( ride ) %></td>
-    <td><%= link_to "Destroy", ride_path( ride ), method: :delete, data: { confirm: "Are you really sure?"} %></td>
-<%end%>
-<%end%>
-
-
-</tr>
-<% end %>
+                <td><%= link_to "Show", ride_path( ride)%></td>  
+                
+            </tr>    
+        <%end%>
+    <% end%>
 
 </table>
 
--------------
+-------
+<%if (current_user)%>
 
-<table>
-    <tr>
-        <th>Departure City</th>
-        <th>Arrival City</th>
-        <th>Meeting Point</th>
-        <th>Departure Date</th>
-        <th>Departure Time</th>
-        <th>Price</th>
- 
-    </tr>    
+    <h1>These are the rides that you listed</h1>
 
-    <% @ride.each do |ride| %>
-    <tr>
-    <%if (current_user)%>
-    <% if current_user.id == @ride.user_id%>
-        <td><%= ride.departure_city %></td>
-        <td><%= ride.arrival_city %></td>
-        <td><%= ride.meeting_point %></td>
-        <td><%= ride.ride_date %></td>
-        <td><%= ride.ride_time.strftime("%H:%M") %></td>
-        <td><%= ride.price %></td>
+    <table>
+        <tr>
+            <th>Departure City</th>
+            <th>Arrival City</th>
+            <th>Meeting Point</th>
+            <th>Departure Date</th>
+            <th>Departure Time</th>
+            <th>Price</th>
+        </tr>    
 
-        <td><%= link_to "Show", ride_path( ride)%></td>  
-        <td><%= link_to "Edit", edit_ride_path( ride ) %></td>
-        <td><%= link_to "Destroy", ride_path( ride ), method: :delete, data: { confirm: "Are you really sure?"} %></td> 
+        <% @rides.each do |ride| %>
+    
+        <% if current_user.id == ride.user_id%>
+            <tr>
+                <td><%= ride.departure_city %></td>
+                <td><%= ride.arrival_city %></td>
+                <td><%= ride.meeting_point %></td>
+                <td><%= ride.ride_date %></td>
+                <td><%= ride.ride_time.strftime("%H:%M") %></td>
+                <td><%= ride.price %></td>
+
+                <td><%= link_to "Show", ride_path( ride)%></td>  
+                <td><%= link_to "Edit", edit_ride_path( ride ) %></td>
+                <td><%= link_to "Destroy", ride_path( ride ), method: :delete, data: { confirm: "Are you really sure?"} %></td> 
+            </tr>    
         <%end%>
         <%end%>
-    </tr>
-    <% end %>
+    
+<% end %>
 
     
 
 
 </table>
+
+-------------
+
+<br>
 
 <%= link_to "Add New Ride", new_ride_path%>
 <br>

@@ -7,30 +7,38 @@ class RidesController < ApplicationController
     @rides = Ride.all # returns an array of rides
   end
 
-  def show
-    @ride = Ride.find(params[:id])  
-    @ride_time = @ride.ride_time.strftime("%H:%M")
-    session = Stripe::Checkout::Session.create(
-        payment_method_types: ['card'],
-        customer_email: current_user.email,
-        line_items: [{
-            name: @ride.user_id,
-            description: "ride from: " + @ride.departure_city + "ride to: " + @ride.arrival_city,
-            amount: (@ride.price * 100).to_i,
-            currency: 'aud',
-            quantity: 1,
-        }],
-        payment_intent_data: {
-            metadata: {
-                user_id: current_user.id,
-                ride_id: @ride.id
-            }
-        },
-        success_url: "#{root_url}payments/success?userId=#{current_user.id}&rideId=#{@ride.id}",
-        cancel_url: "#{root_url}rides"
-    )
+  def error
+  end
 
-    @session_id = session.id
+
+  def show
+    if Ride.find_by(id: params[:id])
+      @ride = Ride.find_by(id: params[:id])  
+      @ride_time = @ride.ride_time.strftime("%H:%M")
+      session = Stripe::Checkout::Session.create(
+          payment_method_types: ['card'],
+          customer_email: current_user.email,
+          line_items: [{
+              name: @ride.user_id,
+              description: "ride from: " + @ride.departure_city + "ride to: " + @ride.arrival_city,
+              amount: (@ride.price * 100).to_i,
+              currency: 'aud',
+              quantity: 1,
+          }],
+          payment_intent_data: {
+              metadata: {
+                  user_id: current_user.id,
+                  ride_id: @ride.id
+              }
+          },
+          success_url: "#{root_url}payments/success?userId=#{current_user.id}&rideId=#{@ride.id}",
+          cancel_url: "#{root_url}rides"
+      )
+      @session_id = session.id
+
+    else
+      render rides_error_path
+    end
   end
 
   def new

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # get 'welcome/index'
   resources :rides
   post 'rides/create'
+  get 'rides/error'
 
   devise_for :users
   
@@ -21,4 +22,6 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   get "/payments/success", to: "payments#success"
+
+  
 end
